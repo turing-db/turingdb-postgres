@@ -4,8 +4,8 @@ Turn a PostgreSQL dump into a [TuringDB](https://turing.bio) graph.
 
 Point it at a `.dump` file and it restores the dump into a throwaway, dockerised
 Postgres (no local `psql`/`pg_restore` required), lets you explore the tables,
-then builds a graph — **one node per row, one edge per foreign key** — and, if
-your data carries embeddings, a vector index for similarity search.
+then builds a graph. **One node per row, one edge per foreign key**. If
+your data has embeddings, it builds a vector index for similarity search.
 
 Everything is available from the `tpg` command line and from a small Python API.
 
@@ -54,7 +54,7 @@ Creates a `postgres:17` container (`turingdb-pg`, on host port `55432`) and runs
 database name is read from the dump, and the connection details are saved to
 `~/.turingdb-postgres/state.json` so every other command can reconnect.
 
-It also **establishes foreign keys** — what the graph step turns into edges.
+It also **establishes foreign keys** that the graph step turns into edges.
 Since many dumps ship primary keys only, `load` adds:
 
 - any FK you pass explicitly: `--fk orders.customer_id=customers.id` (repeatable), and
@@ -91,7 +91,7 @@ uv run tpg fk 'orders.customer_id -> customers.id'
 uv run tpg fk 'orders.customer_id=customers.id' 'items.order_id=orders.id'   # repeatable
 ```
 
-Adds a foreign key to the already-loaded database — handy when `load` didn't
+Adds a foreign key to the already-loaded database, handy when `load` didn't
 infer one, or you skipped inference. It's the same relationship the `graph` step
 reads to build an edge, so you can add a missing link and re-run `graph`. The
 arrow accepts `->`, `=`, or `:`, and adding an FK that already exists is a no-op.
