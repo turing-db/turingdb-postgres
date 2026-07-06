@@ -240,7 +240,7 @@ class PostgresDump:
     ) -> Iterator[Row]:
         """Yield rows one at a time via a server-side cursor.
 
-        Uses its own connection so huge result sets (e.g. every article's text)
+        Uses its own connection so huge result sets (e.g. a large text column)
         are streamed from Postgres in `batch`-sized chunks rather than buffered
         entirely in memory.
         """

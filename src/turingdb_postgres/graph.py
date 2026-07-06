@@ -423,7 +423,7 @@ class GraphImporter:
 # it's predictable — domain-specific mappings still use NodeSpec/EdgeSpec.
 # --------------------------------------------------------------------------- #
 def _pascal(name: str) -> str:
-    """table name -> Label, e.g. 'federal_articles' -> 'FederalArticles'."""
+    """table name -> Label, e.g. 'order_items' -> 'OrderItems'."""
     parts = re.split(r"[^0-9A-Za-z]+", name)
     return "".join(p[:1].upper() + p[1:] for p in parts if p) or name
 
@@ -438,7 +438,7 @@ def _qt(schema: str, table: str) -> str:
 
 
 def _rel_type(fk_col: str, parent_label: str) -> str:
-    """Relationship type from an FK column, e.g. 'law_id' -> 'LAW'.
+    """Relationship type from an FK column, e.g. 'customer_id' -> 'CUSTOMER'.
 
     Falls back to the parent label when the column is just 'id'.
     """
