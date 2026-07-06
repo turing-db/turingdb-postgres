@@ -1,0 +1,23 @@
+[project]
+name = "turingdb-postgres"
+version = "0.1.0"
+description = "Import a PostgreSQL database dump into a TuringDB graph"
+readme = "README.md"
+authors = [
+    { name = "Remy Boutonnet", email = "remy.boutonnet@turing.bio" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "typer>=0.12",
+    "rich>=13.7",
+    "psycopg[binary]>=3.2",
+    "turingdb>=1.0",
+]
+
+[project.scripts]
+turingdb-postgres = "turingdb_postgres.cli:main"
+tpg = "turingdb_postgres.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.10.2,<0.11.0"]
+build-backend = "uv_build"
